@@ -9,19 +9,23 @@ public with sharing class FutureMethods
     public static void UpdateLeadSourceForContacts(List<ID> contactIds)
     {
         List<Contact> contacts = [SELECT LeadSource FROM Contact WHERE Id IN: contactIds];
-
-        for (Contact contact : contacts)
-        {
-            contact.LeadSource = LEAD_SOURCE;
-        }
-
-        update contacts;
+        ContactUtils ContactUtils = new ContactUtils();
+        List<Contact> updatedContacts = ContactUtils.updateLeadSource(contacts, LEAD_SOURCE);
     }
 
     /* 
      * 3. Create a static method that queries Contacts from the database
      *    and executes the future method declared above
     */
+    public static void UpdateLeadSourceForAllContacts()
+    {
+        List<ID> contactIds = new List<ID>();
+        for (Contact contact : [SELECT ID FROM Contact])
+        {
+            contactIds.add(contact.id);
+        }
+        FutureMethods.UpdateLeadSourceForContacts(contactIds);
+    }    
 
     /*
      * 4. Refactor the method from step 1 so that the processing can be 
@@ -29,4 +33,5 @@ public with sharing class FutureMethods
      *    Note that your test should continue to work without any changes
      *    Hint: You will likely want to create a ContactUtils class.
      */
+
 }
