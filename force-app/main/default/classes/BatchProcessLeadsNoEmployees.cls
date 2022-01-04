@@ -1,4 +1,4 @@
-public with sharing class BatchProcessLeadsNoEmployees implements Database.Batchable<sObject>, Database.Stateful 
+global with sharing class BatchProcessLeadsNoEmployees implements Database.Batchable<sObject>, Database.Stateful 
 {
     /*
      * 7. Change this class to be a Batch class that does the following:
@@ -33,10 +33,4 @@ public with sharing class BatchProcessLeadsNoEmployees implements Database.Batch
     {
         System.debug(leadIds);    
     }
-
-     /*
-      * 8. Write a scheduled apex class that:
-      * Starts this batch class with each batch containing a maximum of 
-      * 15 records
-      */
 }
