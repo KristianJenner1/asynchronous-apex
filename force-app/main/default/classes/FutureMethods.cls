@@ -6,7 +6,7 @@ public with sharing class FutureMethods
      *    on a collection of Contacts. Pick any Lead Source 
     */
     @future
-    public static void UpdateLeadSourceForContacts(List<ID> contactIds)
+    public static void AsyncUpdateLeadSourceForContacts(List<ID> contactIds)
     {
         List<Contact> contacts = [SELECT LeadSource FROM Contact WHERE Id IN: contactIds];
         ContactUtils ContactUtils = new ContactUtils();
@@ -17,7 +17,7 @@ public with sharing class FutureMethods
      * 3. Create a static method that queries Contacts from the database
      *    and executes the future method declared above
     */
-    public static void UpdateLeadSourceForAllContacts()
+    public static void AsyncUpdateLeadSourceForAllContacts()
     {
         List<ID> contactIds = new List<ID>();
         for (Contact contact : [SELECT ID FROM Contact])
